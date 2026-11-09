@@ -1,3 +1,5 @@
+import { isAxiosError } from 'axios';
+
 /**
  * 从接口错误中取出给用户看的文案（catch、toast.error、页面错误态统一用它）。
  *
@@ -18,6 +20,9 @@ export function getApiErrorMessage(
   fallback = '操作失败，请稍后重试',
 ): string {
   if (typeof error !== 'object' || error === null) return fallback;
+  if (error instanceof Error && !isAxiosError(error) && error.message.trim()) {
+    return error.message;
+  }
   const body = (error as { response?: { data?: ApiErrorBody } }).response?.data;
   const detail = body?.error;
 

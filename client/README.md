@@ -26,8 +26,25 @@ Mọi request đi qua axios instance duy nhất: `src/api/http.ts` (export `axio
 
 Các hàm gọi API nằm ở `src/api/production.ts` — endpoint hiện tại app gọi:
 
-- `GET /api/lines/:code/dashboard` — trả `{ success, message, data: DashboardRecordRow[][] }` (data nhóm theo `group_name`).
-- `GET /api/lines/injmolding/dashboard` — trả `{ success, message, data: DashboardRecordRow[] }` (dòng phẳng).
+- `POST /api/dashboard` — trả `{ success, message, data: DashboardRecordRow[][] }` (data nhóm theo `group_name`).
+- `GET /api/dashboard/injmolding` — trả `{ success, message, data: DashboardRecordRow[] }` (dòng phẳng).
+
+Body của `POST /api/dashboard`:
+
+```json
+{
+  "data": [
+    { "flow": "BUTTONING-GI-F1-01", "stepNo": 540 },
+    { "flow": "IRONING-GI-F1-01", "stepNo": 560 }
+  ]
+}
+```
+
+Ánh xạ mã chuyền FE sang các cặp `flow`/`stepNo` nằm ở
+`src/config/production-lines.ts`, biến `LINE_DASHBOARD_FILTERS`.
+`F11-FINISHING` dùng hai cặp ở trên. `ASSEMBLY` chưa có thông số BE;
+phải bổ sung cấu hình trước khi tải dữ liệu chuyền này. FE báo lỗi rõ ràng
+và không gửi request nếu chuyền chưa được cấu hình. Không suy ra flow từ mã chuyền.
 
 Khai báo bản ghi (tên trường, kiểu dữ liệu) nằm ở `shared/api.interface.ts` — backend của bạn chỉ cần trả JSON đúng hình dạng này là app chạy nguyên trạng, không cần sửa gì thêm.
 
