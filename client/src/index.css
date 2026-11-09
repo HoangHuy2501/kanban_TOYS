@@ -1,0 +1,184 @@
+@import url("https://miaoda.feishu.cn/fonts/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap");
+
+/* Nền tảng: khai báo layer + engine Tailwind (tương đương theme-layer.css của toolkit) */
+@layer theme, base, components, utilities;
+@import 'tailwindcss' source(none);
+@source "./**/*.{ts,tsx}";
+
+@import "tw-animate-css";
+@import "./tailwind-theme.css";
+@import "./typography.css";
+
+/* Base overrides (tương đương override.css của toolkit) */
+@layer base {
+  * {
+    border-color: var(--border);
+    outline-color: var(--ring);
+
+    @supports (color: color-mix(in lab, red, red)) {
+      outline-color: color-mix(in oklab, var(--ring) 50%, transparent);
+    }
+  }
+
+  .container {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+/* Font địa phương (tương đương font-family.css của toolkit) */
+@font-face {
+  font-family: LarkChineseQuote;
+  font-weight: 300;
+  src: local(PingFangSC-Light);
+  unicode-range: U+2018, U+2019, U+201A, U+201C, U+201D, U+201E;
+}
+
+@font-face {
+  font-family: LarkChineseQuote;
+  font-weight: 400;
+  src: local(PingFangSC-Regular);
+  unicode-range: U+2018, U+2019, U+201A, U+201C, U+201D, U+201E;
+}
+
+@font-face {
+  font-family: LarkChineseQuote;
+  font-weight: 500;
+  src: local(PingFangSC-Medium);
+  unicode-range: U+2018, U+2019, U+201A, U+201C, U+201D, U+201E;
+}
+
+@font-face {
+  font-family: LarkChineseQuote;
+  font-weight: 600;
+  src: local(PingFangSC-Semibold);
+  unicode-range: U+2018, U+2019, U+201A, U+201C, U+201D, U+201E;
+}
+
+@font-face {
+  font-family: LarkEmojiFont;
+  src: local(Apple Color Emoji), local(Noto Color Emoji);
+  unicode-range: U+1F21A, U+1F250, U+1F237, U+26A0;
+}
+
+@font-face {
+  font-family: LarkHackSafariFont;
+  src: local(Helvetica Neue);
+  unicode-range: U+0;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+.tnum {
+  font-variant-numeric: tabular-nums;
+  font-family: var(--font-mono);
+  letter-spacing: -0.01em;
+}
+
+.font-display {
+  font-family: var(--font-sans);
+  letter-spacing: -0.025em;
+}
+
+.lucide {
+  stroke-width: 2;
+}
+
+/* Shop-floor surface: pale blue wash with a faint grid, as on the line TV board */
+.board-surface {
+  background-image:
+    radial-gradient(1200px 420px at 82% -8%, hsl(208 90% 92% / 0.75), transparent 70%),
+    radial-gradient(900px 380px at 4% 104%, hsl(210 80% 94% / 0.6), transparent 72%),
+    linear-gradient(var(--background), var(--background));
+}
+
+.board-banner {
+  background-image:
+    linear-gradient(102deg, var(--board-head-from) 0%, var(--primary) 46%, var(--board-head-to) 100%);
+}
+
+.board-table-head {
+  background-image: linear-gradient(180deg, var(--board-head-from), var(--board-head-to));
+}
+
+.line-card-sheen {
+  background-image: radial-gradient(120% 90% at 96% 118%, hsl(210 90% 94% / 0.85), transparent 62%);
+}
+
+.board-scroll::-webkit-scrollbar {
+  height: 8px;
+  width: 8px;
+}
+
+.board-scroll::-webkit-scrollbar-thumb {
+  background: hsl(212 40% 82%);
+  border-radius: 999px;
+}
+
+html {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-hide {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.rise {
+  animation: rise 0.35s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+@keyframes pulse-dot {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.35;
+    transform: scale(0.82);
+  }
+}
+
+.live-dot {
+  animation: pulse-dot 2.2s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rise,
+  .live-dot {
+    animation: none;
+  }
+}
