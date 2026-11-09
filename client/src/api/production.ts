@@ -2,6 +2,8 @@ import { axiosForBackend } from '@client/src/api/http';
 import type {
   DashboardRecordRow,
   InjmoldingDashboardResponse,
+  LineDashboardFilter,
+  LineDashboardRequest,
   LineDashboardResponse,
   ProductionLine,
   ProductionLineDetail,
@@ -9,13 +11,21 @@ import type {
   ProductionRecordRow,
 } from '@shared/api.interface';
 
-import { findProductionLine } from '@client/src/config/production-lines';
+import {
+  findProductionLine,
+  getLineDashboardFilters,
+} from '@client/src/config/production-lines';
 
 export async function fetchLineDashboard(
-  code: string,
+  data: LineDashboardFilter[],
 ): Promise<DashboardRecordRow[][]> {
-  const response = await axiosForBackend.get<LineDashboardResponse>(
-    `/api/dashboard/${encodeURIComponent(code)}`,
+  if (data.length === 0) {
+    throw new Error('Cần ít nhất một cặp flow/stepNo để tải dashboard.');
+  }
+  const body: LineDashboardRequest = { data };
+  const response = await axiosForBackend.post<LineDashboardResponse>(
+    '/api/dashboard',
+    body,
   );
   return response.data.data;
 }
@@ -91,7 +101,7 @@ const buildDetail = (
 export async function fetchDashboardDetail(
   code: string,
 ): Promise<ProductionLineDetail> {
-  const groups = await fetchLineDashboard(code);
+  const groups = await fetchLineDashboard(getLineDashboardFilters(code));
   return buildDetail(code, groups);
 }
 

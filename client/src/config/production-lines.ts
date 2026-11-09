@@ -1,4 +1,4 @@
-import type { ProductionLine } from '@shared/api.interface';
+import type { LineDashboardFilter, ProductionLine } from '@shared/api.interface';
 
 export const PRODUCTION_LINES: ProductionLine[] = [
   {
@@ -29,3 +29,20 @@ export const PRODUCTION_LINES: ProductionLine[] = [
 
 export const findProductionLine = (code: string): ProductionLine | null =>
   PRODUCTION_LINES.find((line: ProductionLine) => line.code === code) ?? null;
+
+// Backend flow names are independent of the FE line codes.
+export const LINE_DASHBOARD_FILTERS: Record<string, LineDashboardFilter[]> = {
+  'F11-FINISHING': [
+    { flow: 'BUTTONING-GI-F1-01', stepNo: 540 },
+    { flow: 'IRONING-GI-F1-01', stepNo: 560 },
+  ],
+  // Add ASSEMBLY here once its backend flow/stepNo pairs are available.
+};
+
+export const getLineDashboardFilters = (code: string): LineDashboardFilter[] => {
+  const filters = LINE_DASHBOARD_FILTERS[code];
+  if (!filters?.length) {
+    throw new Error(`Chưa cấu hình flow/stepNo cho chuyền ${code}.`);
+  }
+  return filters;
+};
