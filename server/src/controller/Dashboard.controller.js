@@ -4,9 +4,18 @@ const { getValueByTime } = require("../utils/timeUtils");
 exports.dashboard = async (req, res, next) => {
     try {
         // const { flow, StepNo } = req.query;
-        const content = req.body.data;
+        // const content = req.body.data;
         // console.log(content);
-
+        const content = [
+            {
+                flow: "BUTTONING-GI-F1-%",
+                stepNo: 540
+            }
+            // , {
+            //     flow: "FINSHING-TOY-GI-F11-%-OPA",
+            //     stepNo: 979
+            // }
+        ]
         if (!content || !Array.isArray(content) || content.length === 0) {
             return res.status(400).json({ error: "Missing required parameters: flow and StepNo" });
         }
@@ -29,6 +38,22 @@ exports.dashboardInjmolding = async (req, res, next) => {
         ]);
         const results = await DashboardService.GetInjmoldingData(flow, 21);
         return res.json(ApiSuccess.getSelect('dashboardInjmolding', results));
+    } catch (error) {
+        return next(error);
+    }
+}
+
+// bộ phận lắp ráp
+exports.dashboardAssembly = async (req, res, next) => {
+    try {
+        const content = {
+            // flow: "ASSEMBLY-GI-F11%",
+            flow: "PACKING-GI-F9-01-%",
+            stepNo1: 702,
+            stepNo2: 801
+        }
+        const results = await DashboardService.GetAssemblyData(content);
+        return res.json(ApiSuccess.getSelect('dashboardAssembly', results));
     } catch (error) {
         return next(error);
     }

@@ -34,13 +34,9 @@ class DashboardRepository {
                         e.fact_emp_num,
                         e.ord_qty,
                         e.pro_no,
-                        --b.goods_name,
                         e.plan_qty
                     FROM RDS.erp_t8_GI.dbo.sfc_pro_emp_num_def01 e 
-                    join RDS.erp_t8_GI.dbo.sfc_plan2 s on s.def01=e.ord_no
-                    join RDS.erp_t8_GI.dbo.sfc_mo2 m on m.mrp_no=s.mrp_no
-                    join RDS.erp_t8_GI.dbo.bas_goods b on b.goods_no=m.goods_no
-                    WHERE dept = @flow
+                    WHERE dept like @flow
                     AND pro_date >= CAST(GETDATE() AS DATE)
                     AND pro_date < DATEADD(DAY, 1, CAST(GETDATE() AS DATE))
                 ) p
