@@ -84,6 +84,12 @@ export interface InjmoldingDashboardResponse {
   data: DashboardRecordRow[];
 }
 
+export interface AssemblyDashboardResponse {
+  success: true;
+  message: 'dashboardAssembly';
+  data: DashboardRecordRow[];
+}
+
 export interface LineDashboardFilter {
   flow: string;
   stepNo: number;

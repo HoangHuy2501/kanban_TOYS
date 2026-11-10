@@ -2,8 +2,7 @@ import { axiosForBackend } from '@client/src/api/http';
 import type {
   DashboardRecordRow,
   InjmoldingDashboardResponse,
-  LineDashboardFilter,
-  LineDashboardRequest,
+  AssemblyDashboardResponse,
   LineDashboardResponse,
   ProductionLine,
   ProductionLineDetail,
@@ -13,20 +12,13 @@ import type {
 
 import {
   findProductionLine,
-  getLineDashboardFilters,
 } from '@client/src/config/production-lines';
 
-export async function fetchLineDashboard(
-  data: LineDashboardFilter[],
-): Promise<DashboardRecordRow[][]> {
-  if (data.length === 0) {
-    throw new Error('Cần ít nhất một cặp flow/stepNo để tải dashboard.');
-  }
-  const body: LineDashboardRequest = { data };
-  const response = await axiosForBackend.post<LineDashboardResponse>(
+export async function fetchLineDashboard(): Promise<DashboardRecordRow[][]> {
+  const response = await axiosForBackend.get<LineDashboardResponse>(
     '/api/dashboard',
-    body,
   );
+
   return response.data.data;
 }
 
@@ -37,6 +29,13 @@ export async function fetchInjmoldingDashboard(): Promise<DashboardRecordRow[]> 
   return response.data.data;
 }
 
+export async function fetchAssemblyDashboard(): Promise<DashboardRecordRow[]> {
+  const response = await axiosForBackend.get<AssemblyDashboardResponse>(
+    '/api/dashboard/assembly',
+  );
+
+  return response.data.data;
+}
 const toRecordRow = (
   row: DashboardRecordRow,
   index: number,
@@ -101,8 +100,17 @@ const buildDetail = (
 export async function fetchDashboardDetail(
   code: string,
 ): Promise<ProductionLineDetail> {
-  const groups = await fetchLineDashboard(getLineDashboardFilters(code));
+  const groups = await fetchLineDashboard();
+
   return buildDetail(code, groups);
+}
+
+export async function fetchAssemblyDetail(
+  code: string,
+): Promise<ProductionLineDetail> {
+  const rows = await fetchAssemblyDashboard();
+
+  return buildDetail(code, [rows]);
 }
 
 export async function fetchInjmoldingDetail(

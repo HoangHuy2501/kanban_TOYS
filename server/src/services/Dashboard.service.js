@@ -1,4 +1,5 @@
 const dashboardRepository = require("../repository/Dashboard.repository");
+const AssemblyRepository = require("../repository/Assembly.repository");
 const InjmoldingRepository = require("../repository/Injmolding.repository");
 const MapDashboardDataService = require("./MapDashboardData.service");
 class DashboardService {
@@ -32,6 +33,22 @@ class DashboardService {
             return MapDashboardDataService(sqlRows, mysqlRows, "WO")
         } catch (error) {
             throw error;
+        }
+    }
+
+    async GetAssemblyData(data) {
+        try {
+            const [sqlRows, mysqlResult] = await Promise.all([
+                AssemblyRepository.GetAssemblyData(data.flow, data.stepNo1, data.stepNo2),
+                AssemblyRepository.GetActualQuantity(data.flow, data.stepNo1, data.stepNo2)
+            ]);
+            // mysql2.execute() trả về [rows, fields]
+            const mysqlRows = Array.isArray(mysqlResult?.[0])
+                ? mysqlResult[0]
+                : mysqlResult;
+            return MapDashboardDataService(sqlRows, mysqlRows)
+        } catch (error) {
+            throw error
         }
     }
 }

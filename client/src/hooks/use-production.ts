@@ -3,6 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import {
   fetchDashboardDetail,
   fetchInjmoldingDetail,
+  fetchAssemblyDetail,
 } from '@client/src/api/production';
 import type { ProductionLineDetail } from '@shared/api.interface';
 
@@ -14,8 +15,19 @@ export const lineKanbanQueryKey = (code: string) => ['line-kanban', code] as con
 export const fetchKanbanDetail = async (
   code: string,
 ): Promise<ProductionLineDetail> => {
-  if (code.includes('INJMOLDING')) return fetchInjmoldingDetail(code);
-  return fetchDashboardDetail(code);
+  switch (code) {
+    case 'F11-FINISHING':
+      return fetchDashboardDetail(code);
+
+    case 'F11-INJMOLDING':
+      return fetchInjmoldingDetail(code);
+
+    case 'ASSEMBLY':
+      return fetchAssemblyDetail(code);
+
+    default:
+      throw new Error(`Chưa cấu hình API cho chuyền ${code}.`);
+  }
 };
 
 export const useProductionLineDetail = (code: string) => {
