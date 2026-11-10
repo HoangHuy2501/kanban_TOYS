@@ -8,13 +8,12 @@ exports.dashboard = async (req, res, next) => {
         // console.log(content);
         const content = [
             {
-                flow: "BUTTONING-GI-F1-%",
-                stepNo: 540
+                flow: "FINSHING-TOY-GI-F11-01",
+                stepNo: 798
+            }, {
+                flow: "FINSHING-TOY-GI-F11-01-0PA",
+                stepNo: 979
             }
-            // , {
-            //     flow: "FINSHING-TOY-GI-F11-%-OPA",
-            //     stepNo: 979
-            // }
         ]
         if (!content || !Array.isArray(content) || content.length === 0) {
             return res.status(400).json({ error: "Missing required parameters: flow and StepNo" });
@@ -48,9 +47,9 @@ exports.dashboardAssembly = async (req, res, next) => {
     try {
         const content = {
             // flow: "ASSEMBLY-GI-F11%",
-            flow: "PACKING-GI-F9-01-%",
-            stepNo1: 702,
-            stepNo2: 801
+            flow: "ASSEMBLY-TOY-%",
+            stepNo1: 123,
+            stepNo2: 810
         }
         const results = await DashboardService.GetAssemblyData(content);
         return res.json(ApiSuccess.getSelect('dashboardAssembly', results));
