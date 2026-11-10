@@ -36,7 +36,9 @@ export const LINE_DASHBOARD_FILTERS: Record<string, LineDashboardFilter[]> = {
     { flow: 'BUTTONING-GI-F1-01', stepNo: 540 },
     { flow: 'IRONING-GI-F1-01', stepNo: 560 },
   ],
-  // Add ASSEMBLY here once its backend flow/stepNo pairs are available.
+  ASSEMBLY: [
+    { flow: 'SOCK-GI-F4-G', stepNo: 53 },
+  ],
 };
 
 export const getLineDashboardFilters = (code: string): LineDashboardFilter[] => {
