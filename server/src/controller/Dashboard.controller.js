@@ -11,7 +11,7 @@ exports.dashboard = async (req, res, next) => {
                 flow: "FINSHING-TOY-GI-F11-01",
                 stepNo: 798
             }, {
-                flow: "FINSHING-TOY-GI-F11-01-0PA",
+                flow: "FINSHING-TOY-GI-F11-01-OPA",
                 stepNo: 979
             }
         ]
@@ -47,7 +47,7 @@ exports.dashboardAssembly = async (req, res, next) => {
     try {
         const content = {
             // flow: "ASSEMBLY-GI-F11%",
-            flow: "ASSEMBLY-TOY-%",
+            flow: "ASSEMBLY%-TOY%",
             stepNo1: 123,
             stepNo2: 810
         }

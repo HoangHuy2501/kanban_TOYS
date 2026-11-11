@@ -10,7 +10,7 @@ import { useNow } from '@client/src/hooks/use-now';
 import { useRotatingIndex } from '@client/src/hooks/use-rotating-index';
 import { useRowPagination } from '@client/src/hooks/use-row-pagination';
 import {
-  LINE_ROTATION_INTERVAL_MS,
+  getLineRotationIntervalMs,
   isRotatingLine,
 } from '@client/src/config/line-rotation';
 import { Button } from '@client/src/components/ui/button';
@@ -49,10 +49,11 @@ const LineDetailPage = () => {
     return seen;
   }, [rows]);
 
-  const rotationEnabled = isRotatingLine(data?.line.code ?? lineCode) && groups.length > 1;
+  const activeLineCode = data?.line.code ?? lineCode;
+  const rotationEnabled = isRotatingLine(activeLineCode) && groups.length > 1;
   const activeGroupIndex = useRotatingIndex(
     groups.length,
-    LINE_ROTATION_INTERVAL_MS,
+    getLineRotationIntervalMs(activeLineCode),
     rotationEnabled,
   );
   const activeGroup = groups[activeGroupIndex] ?? null;

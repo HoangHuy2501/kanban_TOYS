@@ -26,6 +26,7 @@ class DashboardService {
                 InjmoldingRepository.GetInjmoldingData(flow, StepNo),
                 InjmoldingRepository.GetInjmoldingActualQuantity(flow, StepNo)
             ]);
+
             // mysql2.execute() trả về [rows, fields]
             const mysqlRows = Array.isArray(mysqlResult?.[0])
                 ? mysqlResult[0]
@@ -42,6 +43,7 @@ class DashboardService {
                 AssemblyRepository.GetAssemblyData(data.flow, data.stepNo1, data.stepNo2),
                 AssemblyRepository.GetActualQuantity(data.flow, data.stepNo1, data.stepNo2)
             ]);
+
             // mysql2.execute() trả về [rows, fields]
             const mysqlRows = Array.isArray(mysqlResult?.[0])
                 ? mysqlResult[0]

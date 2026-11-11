@@ -1,0 +1,32 @@
+name: Deploy Kanban Toys
+
+on:
+  push:
+    branches: [master]
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+    permissions:
+      contents: read
+    steps:
+      - name: Pull code
+        run: |
+          cd /home/it/kanban_toys
+          git pull --ff-only "https://x-access-token:${GITHUB_TOKEN}@github.com/cnttc-phamminhoanh/stock_analysis.git" master
+
+      - name: Install package
+        run: |
+          cd /home/it/kanban_toys/server
+          npm install
+
+      - name: Install and bundle UI
+        run: |
+          cd /home/it/kanban_toys/client
+          npm install
+          npm run build
+
+      - name: Restart server
+        run: |
+          cd /home/it/kanban_toys/server_BI
+          pm2 restart stock-api || pm2 start app.js --name stock-api

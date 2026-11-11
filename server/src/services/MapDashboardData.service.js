@@ -17,7 +17,6 @@ function mapDashboardData(sqlRows, mysqlRows, groupBy = "PO") {
 
         if (groupBy === "WO") {
             const wo = normalize(row.WrkOrder);
-
             if (!wo) {
                 throw new Error(
                     "Thiếu WrkOrder khi ghép dữ liệu theo WO"
