@@ -9,6 +9,8 @@
 @import "./tailwind-theme.css";
 @import "./typography.css";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 /* Base overrides (tương đương override.css của toolkit) */
 @layer base {
   * {
@@ -103,9 +105,17 @@ body {
     linear-gradient(var(--background), var(--background));
 }
 
+.dark .board-surface {
+  background: var(--background);
+}
+
 .board-banner {
   background-image:
     linear-gradient(102deg, var(--board-head-from) 0%, var(--primary) 46%, var(--board-head-to) 100%);
+}
+
+.dark .board-banner {
+  background-image: linear-gradient(102deg, var(--board-head-from), var(--board-head-to));
 }
 
 .board-table-head {
@@ -114,6 +124,10 @@ body {
 
 .line-card-sheen {
   background-image: radial-gradient(120% 90% at 96% 118%, hsl(210 90% 94% / 0.85), transparent 62%);
+}
+
+.dark .line-card-sheen {
+  background-image: none;
 }
 
 .board-scroll::-webkit-scrollbar {

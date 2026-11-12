@@ -14,7 +14,7 @@ const LanguageToggle = () => {
     <div
       role="group"
       aria-label={t('languageAria')}
-      className="inline-flex items-center gap-1 rounded-full border border-border bg-white p-1 shadow-sm"
+      className="inline-flex items-center gap-1 rounded-full border border-border bg-card p-1 shadow-sm"
     >
       {options.map((option) => {
         const active = option.value === lang;
@@ -27,7 +27,7 @@ const LanguageToggle = () => {
             className={cn(
               'inline-flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-[12.5px] font-bold transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40',
               active
-                ? 'bg-primary text-white shadow-sm'
+                ? 'bg-primary text-primary-foreground shadow-sm'
                 : 'text-muted-foreground hover:bg-primary/10 hover:text-primary',
             )}
           >

@@ -98,6 +98,38 @@
   --spacing: 0.25rem;
 }
 
+.dark {
+  --background: hsl(220 31% 11%);
+  --foreground: hsl(214 38% 94%);
+  --card: hsl(219 28% 16%);
+  --card-foreground: var(--foreground);
+  --popover: var(--card);
+  --popover-foreground: var(--foreground);
+  --primary: hsl(211 94% 72%);
+  --primary-foreground: hsl(220 38% 14%);
+  --secondary: hsl(219 25% 22%);
+  --secondary-foreground: var(--foreground);
+  --muted: var(--secondary);
+  --muted-foreground: hsl(215 24% 75%);
+  --accent: hsl(216 30% 25%);
+  --accent-foreground: var(--foreground);
+  --border: hsl(217 23% 29%);
+  --input: var(--border);
+  --ring: var(--primary);
+  --line-blue: var(--primary);
+  --line-green: hsl(147 56% 66%);
+  --line-orange: hsl(29 93% 68%);
+  --line-violet: hsl(263 80% 76%);
+  --board-head-from: hsl(216 64% 34%);
+  --board-head-to: hsl(220 63% 26%);
+  --status-ok: hsl(148 57% 68%);
+  --status-warn: hsl(33 93% 70%);
+  --status-danger: hsl(4 93% 76%);
+  --status-idle: var(--muted-foreground);
+  --elevate-1: rgb(255 255 255 / 0.06);
+  --elevate-2: rgb(255 255 255 / 0.1);
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);

@@ -37,7 +37,7 @@ const BoardPagination = ({ page, pageCount, onChange }: BoardPaginationProps) =>
   return (
     <nav
       aria-label={t('paginationAria')}
-      className="inline-flex items-center gap-1 rounded-full border border-border bg-white p-1 shadow-sm"
+      className="inline-flex items-center gap-1 rounded-full border border-border bg-card p-1 shadow-sm"
     >
       <span className="sr-only">{t('pageLabel', { page, total: pageCount })}</span>
       <button
@@ -75,7 +75,7 @@ const BoardPagination = ({ page, pageCount, onChange }: BoardPaginationProps) =>
               className={cn(
                 'tnum flex size-8 items-center justify-center rounded-full text-[13px] font-semibold transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40',
                 item === page
-                  ? 'bg-primary text-white shadow-sm'
+                  ? 'bg-primary text-primary-foreground shadow-sm'
                   : 'text-foreground hover:bg-primary/10 hover:text-primary',
               )}
             >

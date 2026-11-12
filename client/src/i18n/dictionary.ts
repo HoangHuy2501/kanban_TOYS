@@ -41,6 +41,8 @@ const vi = {
   nextPage: 'Trang sau',
   lastPage: 'Trang cuối',
   languageAria: 'Chọn ngôn ngữ',
+  switchToLight: 'Bật chế độ sáng',
+  switchToDark: 'Bật chế độ tối',
 } as const;
 
 export type TranslationKey = keyof typeof vi;
@@ -85,6 +87,8 @@ const en: Record<TranslationKey, string> = {
   nextPage: 'Next page',
   lastPage: 'Last page',
   languageAria: 'Choose language',
+  switchToLight: 'Switch to light mode',
+  switchToDark: 'Switch to dark mode',
 };
 
 export const DICTIONARIES: Record<Language, Record<TranslationKey, string>> = { vi, en };

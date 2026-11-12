@@ -192,7 +192,7 @@ const ProductionTable = ({
   const columns = buildColumns(showGoodsName, showWoCode, showItemCode, showPoCode, t);
 
   return (
-    <div className="overflow-hidden rounded-xl border border-border bg-white shadow-sm">
+    <div className="overflow-hidden rounded-xl border border-border bg-card shadow-sm">
       <div className="board-scroll overflow-x-auto">
         <table className="w-full min-w-[1360px] border-collapse">
           <thead>
@@ -219,7 +219,7 @@ const ProductionTable = ({
                 key={row.id}
                 className={cn(
                   'border-b border-border/50 transition-colors last:border-b-0 hover:bg-primary/[0.06]',
-                  index % 2 === 1 ? 'bg-board-head-from/[0.12]' : 'bg-white',
+                  index % 2 === 1 ? 'bg-board-head-from/[0.12]' : 'bg-card',
                 )}
               >
                 {columns.map((column: ColumnDef) => (
